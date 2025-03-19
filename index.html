@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilihan Buka Bersama</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; background-color: #ffe6f2; }
+        .container { max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ff99cc; border-radius: 10px; background-color: #ffccdd; }
+        .option-group { margin: 10px 0; text-align: left; }
+        label { display: block; margin: 5px 0; color: #d63384; font-weight: bold; }
+        button { margin-top: 10px; padding: 10px; font-size: 16px; cursor: pointer; background-color: #ff66b2; color: white; border: none; border-radius: 5px; }
+        button:hover { background-color: #ff3385; }
+        .hidden { display: none; }
+        .photo { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 10px; border: 3px solid #ff66b2; }
+        #hasil { font-size: 20px; font-weight: bold; color: #d63384; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container" id="ajakan">
+        <img src="foto-shanda.jpg" alt="Foto Shanda" class="photo">
+        <h2 style="color: #d63384;">Mau buka bareng aku, Shanda? 😘</h2>
+        <button onclick="lanjutPilihan()">Mau</button>
+        <button id="gakMau" onmouseover="geserTombol()">Gak Mau</button>
+    </div>
+    
+    <div class="container hidden" id="pilihan">
+        <h2 style="color: #d63384;">Pilih Makanan untuk Buka Bareng Shanda</h2>
+        <div class="option-group" id="makanan">
+            <label><input type="radio" name="makanan" value="Nasi Goreng"> Nasi Goreng</label>
+            <label><input type="radio" name="makanan" value="Ayam Geprek"> Ayam Geprek</label>
+            <label><input type="radio" name="makanan" value="Steak"> Steak</label>
+            <label><input type="radio" name="makanan" value="Sate"> Sate</label>
+        </div>
+        
+        <h2 style="color: #d63384;">Pilih Kegiatan Setelah Buka</h2>
+        <div class="option-group" id="kegiatan">
+            <label><input type="radio" name="kegiatan" value="Nongkrong di Cafe"> Nongkrong di Cafe</label>
+            <label><input type="radio" name="kegiatan" value="Nonton Film"> Nonton Film</label>
+            <label><input type="radio" name="kegiatan" value="Jalan-jalan Santai"> Jalan-jalan Santai</label>
+            <label><input type="radio" name="kegiatan" value="Main Game Bareng"> Main Game Bareng</label>
+        </div>
+        
+        <button onclick="tampilkanPilihan()">Konfirmasi</button>
+        
+        <h3 id="hasil"></h3>
+    </div>
+
+    <script>
+        function geserTombol() {
+            let tombol = document.getElementById('gakMau');
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 100);
+            tombol.style.position = 'absolute';
+            tombol.style.left = `${x}px`;
+            tombol.style.top = `${y}px`;
+        }
+
+        function lanjutPilihan() {
+            document.getElementById('ajakan').classList.add('hidden');
+            document.getElementById('pilihan').classList.remove('hidden');
+        }
+
+        function tampilkanPilihan() {
+            let makanan = document.querySelector('input[name="makanan"]:checked');
+            let kegiatan = document.querySelector('input[name="kegiatan"]:checked');
+            
+            if (makanan && kegiatan) {
+                document.getElementById('hasil').innerHTML = `❤❤❤ Lo bakal makan <b>${makanan.value}</b> dan habis itu <b>${kegiatan.value}</b> bareng Shanda! ❤❤❤`;
+            } else {
+                document.getElementById('hasil').innerHTML = "Pilih makanan dan kegiatan dulu, bro!";
+            }
+        }
+    </script>
+</body>
+</html>
